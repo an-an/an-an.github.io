@@ -99,6 +99,100 @@
       font-size: 0.85rem;
       color: var(--muted);
     }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 0.25rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--surface);
+    }
+    .tabs button {
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.6rem 1rem;
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .tabs button:hover {
+      color: var(--text);
+    }
+    .tabs button[aria-selected="true"] {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .tabpanel {
+      display: none;
+    }
+    .tabpanel[aria-hidden="false"] {
+      display: block;
+    }
+
+    /* Research section */
+    .research-meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    .research-areas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .research-areas span {
+      padding: 0.35rem 0.75rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .stats strong {
+      color: var(--text);
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 0.15rem;
+    }
+    .pub-list {
+      list-style: none;
+    }
+    .pub-list li {
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--surface);
+      font-size: 0.9rem;
+    }
+    .pub-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .pub-list a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .pub-list a:hover {
+      text-decoration: underline;
+    }
+    .pub-cite {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+    }
   </style>
 </head>
 <body>
@@ -108,7 +202,12 @@
       <p class="tagline">Welcome to my corner of the web</p>
     </header>
 
-    <main>
+    <div class="tabs" role="tablist" aria-label="Site sections">
+      <button type="button" role="tab" aria-selected="true" aria-controls="tab-home" id="tab-home-btn">Home</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="tab-research" id="tab-research-btn">Research</button>
+    </div>
+
+    <main id="tab-home" role="tabpanel" aria-labelledby="tab-home-btn" class="tabpanel" aria-hidden="false">
       <p>
         I'm Tetsu Anan. This is my personal homepage. I am studying Solar Physics.
       </p>
@@ -118,13 +217,88 @@
 
       <nav class="links">
         <a href="https://github.com/an-an" rel="noopener noreferrer" target="_blank">GitHub</a>
-        <!-- Add more links as you like, e.g. Twitter, LinkedIn, email -->
+        <a href="https://scholar.google.com/citations?user=OChxq-8AAAAJ&hl=ja" rel="noopener noreferrer" target="_blank">Google Scholar</a>
       </nav>
     </main>
 
+    <section id="tab-research" role="tabpanel" aria-labelledby="tab-research-btn" class="tabpanel" aria-hidden="true" hidden>
+      <p class="research-meta">National Solar Observatory · <a href="https://scholar.google.com/citations?user=OChxq-8AAAAJ&hl=ja" rel="noopener noreferrer" target="_blank" style="color: var(--accent);">Google Scholar profile →</a></p>
+      <div class="research-areas">
+        <span>Solar physics</span>
+        <span>Plasma physics</span>
+        <span>Non-equilibrium physics</span>
+      </div>
+      <p style="color: var(--muted); margin-bottom: 1.5rem;">
+        I work on solar and chromospheric spectropolarimetry, instrumentation (e.g. DKIST/NSO), and related theory. Below is a short summary of my publication metrics and selected papers (from Google Scholar; numbers may change).
+      </p>
+      <div class="stats">
+        <div><strong>896</strong> citations (since 2021)</div>
+        <div><strong>14</strong> h-index</div>
+        <div><strong>19</strong> i10-index</div>
+      </div>
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 1.25rem; margin-bottom: 1rem; color: var(--text);">Selected publications</h2>
+      <ul class="pub-list">
+        <li>
+          <a href="https://scholar.google.com/citations?view_op=view_citation&hl=ja&user=OChxq-8AAAAJ&citation_for_view=OChxq-8AAAAJ:iH-uZ7U-co4C" rel="noopener noreferrer" target="_blank">The Daniel K. Inouye Solar Telescope – Observatory overview</a>
+          <div class="pub-cite">TR Rimmele, M Warner, SL Keil, PR Goode, M Knölker, JR Kuhn, … · Solar Physics 295 (12), 1–49, 2020</div>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?view_op=view_citation&hl=ja&user=OChxq-8AAAAJ&citation_for_view=OChxq-8AAAAJ:R3hNpaxXUhUC" rel="noopener noreferrer" target="_blank">Measurements of photospheric and chromospheric magnetic field structures associated with chromospheric heating over a solar plage region</a>
+          <div class="pub-cite">T Anan, TA Schad, R Kitai, GI Dima, SA Jaeggli, LA Tarr, M Collados, … · The Astrophysical Journal 921 (1), 39, 2021</div>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?view_op=view_citation&hl=ja&user=OChxq-8AAAAJ&citation_for_view=OChxq-8AAAAJ:Zph67rFs4hoC" rel="noopener noreferrer" target="_blank">Spicule dynamics over a plage region</a>
+          <div class="pub-cite">T Anan, R Kitai, T Kawate, T Matsumoto, K Ichimoto, K Shibata, A Hillier, … · Publications of the Astronomical Society of Japan 62 (4), 871–877, 2010</div>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?view_op=view_citation&hl=ja&user=OChxq-8AAAAJ&citation_for_view=OChxq-8AAAAJ:M3ejUd6NZC8C" rel="noopener noreferrer" target="_blank">The Diffraction-Limited Near-Infrared Spectropolarimeter (DL-NIRSP) of the Daniel K. Inouye Solar Telescope (DKIST)</a>
+          <div class="pub-cite">SA Jaeggli, H Lin, P Onaka, H Yamada, T Anan, M Bonnet, G Ching, … · Solar Physics 297 (10), 137, 2022</div>
+        </li>
+      </ul>
+      <nav class="links" style="margin-top: 1.5rem;">
+        <a href="https://scholar.google.com/citations?user=OChxq-8AAAAJ&hl=ja" rel="noopener noreferrer" target="_blank">View all on Google Scholar</a>
+      </nav>
+    </section>
+
     <footer>
-      <p>© 2025 nan · Hosted on <a href="https://pages.github.com/" style="color: var(--accent);" rel="noopener noreferrer" target="_blank">GitHub Pages</a></p>
+      <p>© 2025 Anan · Hosted on <a href="https://pages.github.com/" style="color: var(--accent);" rel="noopener noreferrer" target="_blank">GitHub Pages</a></p>
     </footer>
   </div>
+
+  <script>
+    (function() {
+      var tabHome = document.getElementById('tab-home');
+      var tabResearch = document.getElementById('tab-research');
+      var btnHome = document.getElementById('tab-home-btn');
+      var btnResearch = document.getElementById('tab-research-btn');
+
+      function showHome() {
+        tabHome.removeAttribute('hidden');
+        tabHome.setAttribute('aria-hidden', 'false');
+        tabResearch.hidden = true;
+        tabResearch.setAttribute('aria-hidden', 'true');
+        btnHome.setAttribute('aria-selected', 'true');
+        btnResearch.setAttribute('aria-selected', 'false');
+      }
+      function showResearch() {
+        tabResearch.removeAttribute('hidden');
+        tabResearch.setAttribute('aria-hidden', 'false');
+        tabHome.hidden = true;
+        tabHome.setAttribute('aria-hidden', 'true');
+        btnResearch.setAttribute('aria-selected', 'true');
+        btnHome.setAttribute('aria-selected', 'false');
+      }
+
+      btnHome.addEventListener('click', showHome);
+      btnResearch.addEventListener('click', showResearch);
+
+      btnHome.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showHome(); }
+      });
+      btnResearch.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showResearch(); }
+      });
+    })();
+  </script>
 </body>
 </html>
