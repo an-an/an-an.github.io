@@ -6,7 +6,7 @@
   <title>Tetsu Anan — Home</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;1,9..40,400&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;1,9..40,400&family=Noto+Sans+JP:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0f0f0f;
@@ -29,7 +29,7 @@
     }
 
     body {
-      font-family: 'DM Sans', system-ui, sans-serif;
+      font-family: 'DM Sans', 'Noto Sans JP', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -44,6 +44,39 @@
 
     header {
       margin-bottom: 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem 1.5rem;
+    }
+    header .header-main {
+      min-width: 0;
+    }
+    .lang-switch {
+      display: inline-flex;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--surface);
+      flex-shrink: 0;
+    }
+    .lang-switch button {
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.45rem 0.85rem;
+      background: var(--surface);
+      color: var(--muted);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lang-switch button:hover {
+      color: var(--text);
+    }
+    .lang-switch button[aria-pressed="true"] {
+      background: var(--accent-soft);
+      color: var(--accent);
     }
 
     h1 {
@@ -198,22 +231,24 @@
 <body>
   <div class="container">
     <header>
-      <h1>Tetsu Anan</h1>
-      <p class="tagline">Welcome to my corner of the web</p>
+      <div class="header-main">
+        <h1>Tetsu Anan</h1>
+        <p class="tagline" data-i18n="tagline">Welcome to my corner of the web</p>
+      </div>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" id="lang-btn-en" class="lang-btn" aria-pressed="true">EN</button>
+        <button type="button" id="lang-btn-ja" class="lang-btn" aria-pressed="false">日本語</button>
+      </div>
     </header>
 
     <div class="tabs" role="tablist" aria-label="Site sections">
-      <button type="button" role="tab" aria-selected="true" aria-controls="tab-home" id="tab-home-btn">Home</button>
-      <button type="button" role="tab" aria-selected="false" aria-controls="tab-research" id="tab-research-btn">Research</button>
+      <button type="button" role="tab" aria-selected="true" aria-controls="tab-home" id="tab-home-btn" data-i18n="tabHome">Home</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="tab-research" id="tab-research-btn" data-i18n="tabResearch">Research</button>
     </div>
 
     <main id="tab-home" role="tabpanel" aria-labelledby="tab-home-btn" class="tabpanel" aria-hidden="false">
-      <p>
-        I'm Tetsu Anan. This is my personal homepage. I am an associate scientist of <a href="https://nso.edu/">US NSF's Naional Solar Observatory</a>.
-      </p>
-      <p>
-        I'll add more here over time.
-      </p>
+      <p data-i18n-html="intro">I'm Tetsu Anan. This is my personal homepage. I am an associate scientist of <a href="https://nso.edu/">US NSF's National Solar Observatory</a>.</p>
+      <p data-i18n="homeMore">I'll add more here over time.</p>
 
       <nav class="links">
         <a href="https://github.com/an-an" rel="noopener noreferrer" target="_blank">GitHub</a>
@@ -222,21 +257,21 @@
     </main>
 
     <section id="tab-research" role="tabpanel" aria-labelledby="tab-research-btn" class="tabpanel" aria-hidden="true" hidden>
-      <p class="research-meta">National Solar Observatory · <a href="https://scholar.google.com/citations?user=OChxq-8AAAAJ&hl=ja" rel="noopener noreferrer" target="_blank" style="color: var(--accent);">Google Scholar profile →</a></p>
+      <p class="research-meta" data-i18n-html="researchMeta">National Solar Observatory · <a href="https://scholar.google.com/citations?user=OChxq-8AAAAJ&hl=ja" rel="noopener noreferrer" target="_blank" style="color: var(--accent);">Google Scholar profile →</a></p>
       <div class="research-areas">
-        <span>Solar physics</span>
-        <span>Plasma physics</span>
-        <span>Spectropolarimetry</span>
+        <span data-i18n="areaSolar">Solar physics</span>
+        <span data-i18n="areaPlasma">Plasma physics</span>
+        <span data-i18n="areaSpec">Spectropolarimetry</span>
       </div>
-      <p style="color: var(--muted); margin-bottom: 1.5rem;">
+      <p style="color: var(--muted); margin-bottom: 1.5rem;" data-i18n="researchBlurb">
         I am interested in heating and dynamics in solar chromosphere, magnetic reconnections, magnetic diffusion/dissipation, turbulence, partial ionized plasma, electric fields, high-energy non-thermal particles, and instrumentation for integral-field-unit spectro-polarimetry. Below is a short summary of my publication metrics and selected papers (from Google Scholar; numbers may change).
       </p>
       <div class="stats">
-        <div><strong>896</strong> citations (since 2021)</div>
-        <div><strong>14</strong> h-index</div>
-        <div><strong>19</strong> i10-index</div>
+        <div><strong>896</strong> <span data-i18n="statCitations">citations (since 2021)</span></div>
+        <div><strong>14</strong> <span data-i18n="statH">h-index</span></div>
+        <div><strong>19</strong> <span data-i18n="statI10">i10-index</span></div>
       </div>
-      <h2 style="font-family: 'Playfair Display', serif; font-size: 1.25rem; margin-bottom: 1rem; color: var(--text);">Selected publications</h2>
+      <h2 style="font-family: 'Playfair Display', 'Noto Sans JP', serif; font-size: 1.25rem; margin-bottom: 1rem; color: var(--text);" data-i18n="selectedPubs">Selected publications</h2>
       <ul class="pub-list">
         <li>
           <a href="https://scholar.google.com/citations?view_op=view_citation&hl=ja&user=OChxq-8AAAAJ&cstart=20&pagesize=80&citation_for_view=OChxq-8AAAAJ:mB3voiENLucC" rel="noopener noreferrer" target="_blank">Magnetic diffusion in solar atmosphere produces measurable electric fields</a>
@@ -260,22 +295,93 @@
         </li>
       </ul>
       <nav class="links" style="margin-top: 1.5rem;">
-        <a href="https://scholar.google.com/citations?user=OChxq-8AAAAJ&hl=ja" rel="noopener noreferrer" target="_blank">View all on Google Scholar</a>
-        <a href="https://ui.adsabs.harvard.edu/search/filter_property_fq_property=AND&filter_property_fq_property=property%3A%22refereed%22&fq=%7B!type%3Daqp%20v%3D%24fq_database%7D&fq=%7B!type%3Daqp%20v%3D%24fq_property%7D&fq_database=database%3Aastronomy&fq_property=(property%3A%22refereed%22)&q=%20%20first_author%3A%22Anan%2C%20Tetsu%22&sort=date%20desc%2C%20bibcode%20desc&p_=0" rel="noopener noreferrer" target="_blank">ADS (The first author papers)</a>
+        <a href="https://scholar.google.com/citations?user=OChxq-8AAAAJ&hl=ja" rel="noopener noreferrer" target="_blank" data-i18n="linkScholarAll">View all on Google Scholar</a>
+        <a href="https://ui.adsabs.harvard.edu/search/filter_property_fq_property=AND&filter_property_fq_property=property%3A%22refereed%22&fq=%7B!type%3Daqp%20v%3D%24fq_database%7D&fq=%7B!type%3Daqp%20v%3D%24fq_property%7D&fq_database=database%3Aastronomy&fq_property=(property%3A%22refereed%22)&q=%20%20first_author%3A%22Anan%2C%20Tetsu%22&sort=date%20desc%2C%20bibcode%20desc&p_=0" rel="noopener noreferrer" target="_blank" data-i18n="linkAds">ADS (The first author papers)</a>
       </nav>
     </section>
 
     <footer>
-      <p>© 2025 Anan · Hosted on <a href="https://pages.github.com/" style="color: var(--accent);" rel="noopener noreferrer" target="_blank">GitHub Pages</a></p>
+      <p data-i18n-html="footer">© 2025 Anan · Hosted on <a href="https://pages.github.com/" style="color: var(--accent);" rel="noopener noreferrer" target="_blank">GitHub Pages</a></p>
     </footer>
   </div>
 
   <script>
     (function() {
+      var SCHOLAR = 'https://scholar.google.com/citations?user=OChxq-8AAAAJ&hl=ja';
+      var PAGES = 'https://pages.github.com/';
+      var I18N = {
+        title: { en: 'Tetsu Anan — Home', ja: '阿南哲 — ホーム' },
+        tagline: { en: 'Welcome to my corner of the web', ja: 'ウェブ上の私のページへようこそ' },
+        tabHome: { en: 'Home', ja: 'ホーム' },
+        tabResearch: { en: 'Research', ja: '研究' },
+        intro: {
+          en: "I'm Tetsu Anan. This is my personal homepage. I am an associate scientist of <a href=\"https://nso.edu/\">US NSF's National Solar Observatory</a>.",
+          ja: '阿南哲です。ここは個人のホームページです。米国国立科学財団（NSF）<a href="https://nso.edu/">国立太陽観測所（NSO）</a>の准研究員です。'
+        },
+        homeMore: { en: "I'll add more here over time.", ja: '内容は随時追加します。' },
+        researchMeta: {
+          en: 'National Solar Observatory · <a href="' + SCHOLAR + '" rel="noopener noreferrer" target="_blank" style="color: var(--accent);">Google Scholar profile →</a>',
+          ja: '国立太陽観測所 · <a href="' + SCHOLAR + '" rel="noopener noreferrer" target="_blank" style="color: var(--accent);">Google Scholar プロフィール →</a>'
+        },
+        areaSolar: { en: 'Solar physics', ja: '太陽物理学' },
+        areaPlasma: { en: 'Plasma physics', ja: 'プラズマ物理学' },
+        areaSpec: { en: 'Spectropolarimetry', ja: '分光偏光観測' },
+        researchBlurb: {
+          en: 'I am interested in heating and dynamics in solar chromosphere, magnetic reconnections, magnetic diffusion/dissipation, turbulence, partial ionized plasma, electric fields, high-energy non-thermal particles, and instrumentation for integral-field-unit spectro-polarimetry. Below is a short summary of my publication metrics and selected papers (from Google Scholar; numbers may change).',
+          ja: '太陽彩層の加熱と力学、磁気リコネクション、磁気拡散・散逸、乱流、部分電離プラズマ、電場、高エネルギー非熱粒子、積分視野ユニット分光偏光観測の計器開発に関心があります。以下は論文指標の要約と主な論文です（Google Scholar 由来・数値は変動します）。'
+        },
+        statCitations: { en: 'citations (since 2021)', ja: '被引用数（2021年〜）' },
+        statH: { en: 'h-index', ja: 'h指数' },
+        statI10: { en: 'i10-index', ja: 'i10指数' },
+        selectedPubs: { en: 'Selected publications', ja: '主な論文' },
+        linkScholarAll: { en: 'View all on Google Scholar', ja: 'Google Scholar で全件を見る' },
+        linkAds: { en: 'ADS (The first author papers)', ja: 'ADS（第一著者論文）' },
+        footer: {
+          en: '© 2025 Anan · Hosted on <a href="' + PAGES + '" style="color: var(--accent);" rel="noopener noreferrer" target="_blank">GitHub Pages</a>',
+          ja: '© 2025 Anan · <a href="' + PAGES + '" style="color: var(--accent);" rel="noopener noreferrer" target="_blank">GitHub Pages</a> でホスティング'
+        }
+      };
+
+      var LANG_KEY = 'ananhome.lang';
       var tabHome = document.getElementById('tab-home');
       var tabResearch = document.getElementById('tab-research');
       var btnHome = document.getElementById('tab-home-btn');
       var btnResearch = document.getElementById('tab-research-btn');
+      var btnLangEn = document.getElementById('lang-btn-en');
+      var btnLangJa = document.getElementById('lang-btn-ja');
+
+      function getLang() {
+        var s = localStorage.getItem(LANG_KEY);
+        return s === 'ja' ? 'ja' : 'en';
+      }
+
+      function setLang(lang) {
+        var L = lang === 'ja' ? 'ja' : 'en';
+        localStorage.setItem(LANG_KEY, L);
+        document.documentElement.lang = L === 'ja' ? 'ja' : 'en';
+        document.title = I18N.title[L];
+
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+          var key = el.getAttribute('data-i18n');
+          if (I18N[key] && I18N[key][L] !== undefined) {
+            el.textContent = I18N[key][L];
+          }
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+          var key = el.getAttribute('data-i18n-html');
+          if (I18N[key] && I18N[key][L] !== undefined) {
+            el.innerHTML = I18N[key][L];
+          }
+        });
+
+        btnLangEn.setAttribute('aria-pressed', L === 'en' ? 'true' : 'false');
+        btnLangJa.setAttribute('aria-pressed', L === 'ja' ? 'true' : 'false');
+      }
+
+      setLang(getLang());
+
+      btnLangEn.addEventListener('click', function() { setLang('en'); });
+      btnLangJa.addEventListener('click', function() { setLang('ja'); });
 
       function showHome() {
         tabHome.removeAttribute('hidden');
